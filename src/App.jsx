@@ -3,6 +3,8 @@ import React from "react";
 import World from "./scene/World";
 import "./App.css";
 import Hero from "./ui/Hero";
+import { ForestUI } from "./ui/ForestUI";
+import ParchmentModal from "./ui/ParchmentModal";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         <World />
       </Canvas>
       <Hero />
+      <ForestUI />
+      <ParchmentModal />
     </>
   );
 };

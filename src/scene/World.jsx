@@ -2,12 +2,13 @@ import { OrbitControls, Sky } from "@react-three/drei";
 import { Suspense } from "react";
 import Mountain from "../components/Mountain";
 import BaseCamp from "../sections/BaseCamp";
-import IntroCamera from "../camera/IntroCamera";
+import { CameraController } from "../camera/CameraController";
+import Forest from "../sections/Forest";
 
 export default function World() {
   return (
     <>
-      <IntroCamera />
+      <CameraController />
 
       <mesh position={[80, 40, -150]}>
         <sphereGeometry args={[3, 32, 32]} />
@@ -40,6 +41,7 @@ export default function World() {
         <Mountain position={[0, -3, -60]} scale={3} />
 
         <BaseCamp />
+        <Forest />
       </Suspense>
 
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
@@ -47,12 +49,12 @@ export default function World() {
         <meshStandardMaterial color="#4b6b3c" />
       </mesh>
 
-      {/* <OrbitControls
+      <OrbitControls
         enablePan={false}
         minDistance={5}
         maxDistance={30}
         maxPolarAngle={Math.PI / 2.1}
-      /> */}
+      />
     </>
   );
 }
