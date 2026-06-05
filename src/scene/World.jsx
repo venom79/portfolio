@@ -22,6 +22,7 @@ export default function World() {
       />
       <fog attach="fog" args={["#d8cbb3", 40, 200]} />
       {/* <fog attach="fog" args={["#c9d6c0", 40, 200]} /> */}
+      {/* <fog attach="fog" args={["#c9d6c0", 40, 200]} /> */}
       <ambientLight intensity={0.3} />
       <directionalLight
         castShadow
