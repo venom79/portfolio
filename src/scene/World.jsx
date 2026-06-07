@@ -1,27 +1,28 @@
-import { OrbitControls, Sky } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Sky } from "@react-three/drei";
 import { Suspense } from "react";
 import Mountain from "../components/Mountain";
 import BaseCamp from "../sections/BaseCamp";
 import { CameraController } from "../camera/CameraController";
 import Forest from "../sections/Forest";
+import Summit from "../sections/Summit";
 
 export default function World() {
   return (
     <>
       <CameraController />
-
+      <PerspectiveCamera makeDefault position={[0, 30, 40]} />
       <mesh position={[80, 40, -150]}>
         <sphereGeometry args={[3, 32, 32]} />
         <meshBasicMaterial color="yellow" />
       </mesh>
       <Sky
-        turbidity={10}
-        rayleigh={3}
+        turbidity={6}
+        rayleigh={1}
         mieCoefficient={0.005}
         mieDirectionalG={0.7}
-        sunPosition={[50, 10, -100]}
+        sunPosition={[150, 40, -300]}
       />
-      <fog attach="fog" args={["#d8cbb3", 40, 200]} />
+      <fog attach="fog" args={["#d8cbb3", 80, 350]} />
       {/* <fog attach="fog" args={["#c9d6c0", 40, 200]} /> */}
       {/* <fog attach="fog" args={["#c9d6c0", 40, 200]} /> */}
       <ambientLight intensity={0.3} />
@@ -42,18 +43,19 @@ export default function World() {
 
         <BaseCamp />
         <Forest />
+        <Summit />
       </Suspense>
 
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
-        <planeGeometry args={[150, 300]} />
+        <planeGeometry args={[1000, 1000]} />
         <meshStandardMaterial color="#4b6b3c" />
       </mesh>
 
       <OrbitControls
-        enablePan={false}
-        minDistance={5}
-        maxDistance={30}
-        maxPolarAngle={Math.PI / 2.1}
+        makeDefault
+        enablePan={true}
+        enableRotate={true}
+        enableZoom={true}
       />
     </>
   );

@@ -5,10 +5,12 @@ import "./App.css";
 import Hero from "./ui/Hero";
 import { ForestUI } from "./ui/ForestUI";
 import ParchmentModal from "./ui/ParchmentModal";
+import { Leva } from "leva";
 
 const App = () => {
   return (
     <>
+      <Leva collapsed={false} />
       <Canvas
         camera={{ position: [0, 8, 20], fov: 60 }}
         style={{

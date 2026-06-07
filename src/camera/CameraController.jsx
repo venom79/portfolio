@@ -74,6 +74,46 @@ export const CameraController = () => {
         "<",
       );
     }
+
+    if (section === "summit") {
+      const tl = gsap.timeline();
+
+      // Look at summit first
+      gsap.to(lookTarget.current, {
+        x: -4,
+        y: 90,
+        z: -185,
+        duration: 4,
+        ease: "power2.inOut",
+      });
+
+      // Rise above forest
+      tl.to(camera.position, {
+        x: 0,
+        y: 12,
+        z: 15,
+        duration: 1.5,
+        ease: "power2.inOut",
+      });
+
+      // Fly toward mountains
+      tl.to(camera.position, {
+        x: 0,
+        y: 60,
+        z: -30,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+
+      // Final summit composition
+      tl.to(camera.position, {
+        x: -4,
+        y: 80,
+        z: -115,
+        duration: 2.5,
+        ease: "power3.out",
+      });
+    }
   }, [section, camera]);
 
   useFrame(() => {
@@ -83,6 +123,8 @@ export const CameraController = () => {
       lookTarget.current.z,
     );
   });
-
+  useEffect(() => {
+    console.log("SECTION:", section);
+  }, [section]);
   return null;
 };
