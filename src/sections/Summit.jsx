@@ -1,9 +1,6 @@
 import { useControls } from "leva";
 import Hiker from "../components/Hiker";
-import Chest from "../components/Chest";
 import Flag from "../components/Flag";
-import PostLantern from "../components/PostLantern";
-
 import MountainRange from "../components/MountainRange";
 
 const Summit = () => {

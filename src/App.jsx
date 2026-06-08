@@ -6,6 +6,8 @@ import Hero from "./ui/Hero";
 import { ForestUI } from "./ui/ForestUI";
 import ParchmentModal from "./ui/ParchmentModal";
 import { Leva } from "leva";
+import JournalModal from "./ui/JournalModal";
+import ContactModal from "./ui/ContactModal";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
       <Hero />
       <ForestUI />
       <ParchmentModal />
+      <JournalModal />
+      <ContactModal />
     </>
   );
 };

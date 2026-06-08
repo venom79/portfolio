@@ -49,9 +49,6 @@ const Hero = () => {
           Start Expedition →
         </button>
 
-        <button className="rounded-xl border border-stone-400/20 px-6 py-3 font-medium transition-all hover:bg-white/10">
-          View Projects
-        </button>
         <button onClick={() => setSection("summit")}>Summit</button>
       </div>
     </motion.div>

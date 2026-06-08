@@ -22,3 +22,5 @@ createRoot(document.getElementById("root")).render(
 // Post Lantern by Kay Lousberg (https://poly.pizza/m/ZSQ65S4lEu)
 // Flag by Arif [CC-BY] (https://cre.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/hCznL0BXnD)
 // Rock by Kenney (https://poly.pizza/m/cBqdRdLDDL)// Three Ring Binder / Notebook by Alex Safayan [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/99BDdZvSbgo)
+// Cat by Quaternius (https://poly.pizza/m/qKICY6xla2)
+// Laptop by J-Toastie [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/UGOWjMUC5U)
