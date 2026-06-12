@@ -1,7 +1,14 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Sparkles } from "@react-three/drei";
+import { useState } from "react";
+import { HoverLabel } from "./HoverLabel";
+import { useUIStore } from "../store/uiStore";
 
-const Flag = (props) => {
+const Flag = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) => {
   const { scene } = useGLTF("/models/Flag.glb");
+
+  const [hovered, setHovered] = useState(false);
+
+  const openBoard = useUIStore((state) => state.openBoard);
 
   scene.traverse((child) => {
     if (child.isMesh) {
@@ -10,7 +17,36 @@ const Flag = (props) => {
     }
   });
 
-  return <primitive object={scene.clone()} {...props} />;
+  return (
+    <group
+      position={position}
+      rotation={rotation}
+      onClick={() => openBoard("milestones")}
+      onPointerOver={() => {
+        setHovered(true);
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        setHovered(false);
+        document.body.style.cursor = "default";
+      }}
+    >
+      {hovered && (
+        <Sparkles count={20} scale={4} size={4} speed={0.4} color="#ffd27d" />
+      )}
+
+      {hovered && (
+        <group position={[0, 7, 0]}>
+          <HoverLabel text="🏳 Trail Markers" />
+        </group>
+      )}
+
+      <primitive
+        object={scene.clone()}
+        scale={hovered ? scale * 1.05 : scale}
+      />
+    </group>
+  );
 };
 
 export default Flag;

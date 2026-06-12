@@ -48,8 +48,6 @@ const Hero = () => {
         >
           Start Expedition →
         </button>
-
-        <button onClick={() => setSection("summit")}>Summit</button>
       </div>
     </motion.div>
   );

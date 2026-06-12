@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { Clone, useGLTF } from "@react-three/drei";
 import { useEffect } from "react";
 
 export default function PineTree({
@@ -7,20 +7,26 @@ export default function PineTree({
   rotation = [0, 0, 0],
 }) {
   const { scene } = useGLTF("/models/Pine.glb");
+
   useEffect(() => {
     scene.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
-        child.receiveShadow = true;
+
+        // Trees usually don't need receiveShadow
+        child.receiveShadow = false;
       }
     });
   }, [scene]);
+
   return (
-    <primitive
-      object={scene.clone()}
+    <Clone
+      object={scene}
       position={position}
       scale={scale}
       rotation={rotation}
     />
   );
 }
+
+useGLTF.preload("/models/Pine.glb");

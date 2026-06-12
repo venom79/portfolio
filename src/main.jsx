@@ -24,3 +24,4 @@ createRoot(document.getElementById("root")).render(
 // Rock by Kenney (https://poly.pizza/m/cBqdRdLDDL)// Three Ring Binder / Notebook by Alex Safayan [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/99BDdZvSbgo)
 // Cat by Quaternius (https://poly.pizza/m/qKICY6xla2)
 // Laptop by J-Toastie [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/UGOWjMUC5U)
+// "Animated Flag" (https://skfb.ly/6BGAu) by ManySince910 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).

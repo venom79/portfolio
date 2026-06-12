@@ -6,6 +6,7 @@ import Cat from "../components/Cat";
 import { Laptop } from "../components/Laptop";
 import { Journal } from "../components/Journal";
 import { useUIStore } from "../store/uiStore";
+import { Sparkles } from "@react-three/drei";
 
 const BaseCamp = () => {
   const openBoard = useUIStore((state) => state.openBoard);
@@ -29,7 +30,7 @@ const BaseCamp = () => {
       <PineTree position={[13, -1, 5]} scale={2.3} />
 
       <PineTree position={[-13, -1, 5]} scale={1.8} />
-      <Cat position={[-1, -0.6, 14.5]} rotation={[0, 0, 0]} scale={0.6} />
+      <Cat position={[-1, -1, 14.5]} rotation={[0, 0, 0]} scale={0.6} />
       <Laptop
         position={[2, -1, 14]}
         rotation={[0, -1.2, 0]}

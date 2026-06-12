@@ -19,11 +19,12 @@ export default function Campfire({
     <group>
       <pointLight
         castShadow
-        color="#ff7b00"
-        intensity={15}
-        distance={20}
-        position={[position[0], position[1] + 0.5, position[2]]}
+        color="#ff8c42"
+        intensity={10}
+        distance={15}
+        position={[position[0], position[1] + 0.36, position[2]]}
       />
+
       <primitive
         object={scene.clone()}
         position={position}
