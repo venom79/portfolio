@@ -3,9 +3,43 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useCameraStore } from "../store/cameraStore";
 
-export const CameraController = () => {
-  const { camera } = useThree();
+const CAMERA_PRESETS = {
+  desktop: {
+    intro: [0, 30, 30],
 
+    baseCamp: [0, 2, 20],
+
+    forest: [25, 5, 18],
+
+    summit: [-4, 80, -115],
+  },
+
+  tablet: {
+    intro: [0, 35, 40],
+
+    baseCamp: [0, 3, 24],
+
+    forest: [28, 8, 26],
+
+    summit: [-4, 90, -125],
+  },
+
+  mobile: {
+    intro: [0, 45, 55],
+
+    baseCamp: [0, 8, 35],
+
+    forest: [35, 10, 35],
+
+    summit: [-4, 100, -145],
+  },
+};
+
+export const CameraController = () => {
+  const { camera, size } = useThree();
+  const device =
+    size.width < 768 ? "mobile" : size.width < 1024 ? "tablet" : "desktop";
+  console.log(device);
   const section = useCameraStore((state) => state.section);
 
   const setSection = useCameraStore((s) => s.setSection);
@@ -13,6 +47,8 @@ export const CameraController = () => {
   const setSummitAtmosphere = useCameraStore((s) => s.setSummitAtmosphere);
 
   const isLoaded = useCameraStore((s) => s.isLoaded);
+
+  const preset = CAMERA_PRESETS[device];
 
   const lookTarget = useRef({
     x: 0,
@@ -33,11 +69,17 @@ export const CameraController = () => {
     });
   };
 
+  useEffect(() => {
+    camera.fov = device === "mobile" ? 80 : device === "tablet" ? 70 : 60;
+
+    camera.updateProjectionMatrix();
+  }, [device, camera]);
+
   // Initial cinematic intro
   useEffect(() => {
     if (!isLoaded) return;
 
-    camera.position.set(0, 30, 30);
+    camera.position.set(...preset.intro);
 
     gsap.to(camera.position, {
       x: 0,
@@ -83,10 +125,12 @@ export const CameraController = () => {
         ease: "power2.inOut",
       });
 
+      const [x, y, z] = preset.baseCamp;
+
       tl.to(camera.position, {
-        x: 0,
-        y: 2,
-        z: 20,
+        x,
+        y,
+        z,
         duration: 2,
         ease: "power3.out",
       });
@@ -126,12 +170,14 @@ export const CameraController = () => {
         "<",
       );
 
+      const [x, y, z] = preset.forest;
+
       tl.to(
         camera.position,
         {
-          x: 25,
-          y: 6,
-          z: 20,
+          x,
+          y,
+          z,
           duration: 3,
           ease: "power2.inOut",
         },
@@ -180,10 +226,12 @@ export const CameraController = () => {
       });
 
       // Final summit composition
+      const [x, y, z] = preset.summit;
+
       tl.to(camera.position, {
-        x: -4,
-        y: 80,
-        z: -115,
+        x,
+        y,
+        z,
         duration: 2.5,
         ease: "power3.out",
       });

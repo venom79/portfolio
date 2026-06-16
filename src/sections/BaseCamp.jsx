@@ -10,6 +10,7 @@ import { Sparkles } from "@react-three/drei";
 
 const BaseCamp = () => {
   const openBoard = useUIStore((state) => state.openBoard);
+  const isMobile = window.innerWidth < 768;
   return (
     <>
       {/* Tent */}
@@ -30,15 +31,19 @@ const BaseCamp = () => {
       <PineTree position={[13, -1, 5]} scale={2.3} />
 
       <PineTree position={[-13, -1, 5]} scale={1.8} />
-      <Cat position={[-1, -1, 14.5]} rotation={[0, 0, 0]} scale={0.6} />
+      <Cat
+        position={isMobile ? [2.6, -1, 15.2] : [-1, -1, 14.5]}
+        rotation={isMobile ? [0, -0.8, 0] : [0, 0, 0]}
+        scale={0.6}
+      />
       <Laptop
-        position={[2, -1, 14]}
+        position={isMobile ? [-0.6, -1, 14] : [2, -1, 14]}
         rotation={[0, -1.2, 0]}
         scale={1}
         onClick={() => openBoard("laptop")}
       />
       <Journal
-        position={[4, -1, 14]}
+        position={isMobile ? [1.4, -1, 14] : [4, -1, 14]}
         rotation={[0, 3, 0]}
         scale={1}
         onClick={() => openBoard("journal")}
