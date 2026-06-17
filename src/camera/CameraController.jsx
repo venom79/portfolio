@@ -25,9 +25,9 @@ const CAMERA_PRESETS = {
   },
 
   mobile: {
-    intro: [0, 45, 55],
+    intro: [0, 30, 30],
 
-    baseCamp: [0, 8, 35],
+    baseCamp: [0, 10, 42],
 
     forest: [35, 10, 35],
 

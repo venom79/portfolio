@@ -6,46 +6,53 @@ import Cat from "../components/Cat";
 import { Laptop } from "../components/Laptop";
 import { Journal } from "../components/Journal";
 import { useUIStore } from "../store/uiStore";
-import { Sparkles } from "@react-three/drei";
+import { BASECAMP_LAYOUT } from "../config/sceneLayouts";
 
 const BaseCamp = () => {
   const openBoard = useUIStore((state) => state.openBoard);
-  const isMobile = window.innerWidth < 768;
+
+  const width = window.innerWidth;
+
+  const layout =
+    width < 768
+      ? BASECAMP_LAYOUT.mobile
+      : width < 1024
+        ? BASECAMP_LAYOUT.tablet
+        : BASECAMP_LAYOUT.desktop;
   return (
     <>
       {/* Tent */}
-      <Tent position={[0, 0.95, 10]} scale={3} rotation={[0, 1, 0]} />
+      <Tent
+        position={layout.tent.position}
+        scale={layout.tent.scale}
+        rotation={layout.tent.rotation}
+      />
 
       {/* Campfire */}
-      <Campfire position={[3.5, -0.7, 12]} scale={0.8} />
+      <Campfire
+        position={layout.campfire.position}
+        scale={layout.campfire.scale}
+      />
 
       {/* Trees */}
-      <PineTree position={[-8, -1, 2]} scale={2} />
-
-      <PineTree position={[-12, -1, 9]} scale={1.7} />
-
-      <PineTree position={[10, -1, 3]} scale={2.3} />
-
-      <PineTree position={[13, -1, 10]} scale={1.8} />
-
-      <PineTree position={[13, -1, 5]} scale={2.3} />
-
-      <PineTree position={[-13, -1, 5]} scale={1.8} />
+      {layout.trees.map((tree, index) => (
+        <PineTree key={index} position={tree.position} scale={tree.scale} />
+      ))}
       <Cat
-        position={isMobile ? [2.6, -1, 15.2] : [-1, -1, 14.5]}
-        rotation={isMobile ? [0, -0.8, 0] : [0, 0, 0]}
-        scale={0.6}
+        position={layout.cat.position}
+        rotation={layout.cat.rotation}
+        scale={layout.cat.scale}
       />
       <Laptop
-        position={isMobile ? [-0.6, -1, 14] : [2, -1, 14]}
-        rotation={[0, -1.2, 0]}
-        scale={1}
+        position={layout.laptop.position}
+        rotation={layout.laptop.rotation}
+        scale={layout.laptop.scale}
         onClick={() => openBoard("laptop")}
       />
       <Journal
-        position={isMobile ? [1.4, -1, 14] : [4, -1, 14]}
-        rotation={[0, 3, 0]}
-        scale={1}
+        position={layout.journal.position}
+        rotation={layout.journal.rotation}
+        scale={layout.journal.scale}
         onClick={() => openBoard("journal")}
       />
     </>
