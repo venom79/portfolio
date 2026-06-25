@@ -27,11 +27,11 @@ const CAMERA_PRESETS = {
   mobile: {
     intro: [0, 30, 30],
 
-    baseCamp: [0, 10, 42],
+    baseCamp: [0, 2, 20],
 
-    forest: [35, 10, 35],
+    forest: [25, 5, 21],
 
-    summit: [-4, 100, -145],
+    summit: [-4, 90, -115],
   },
 };
 

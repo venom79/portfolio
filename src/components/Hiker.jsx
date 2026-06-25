@@ -36,7 +36,7 @@ const Hiker = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) => {
       )}
 
       {hovered && (
-        <group position={[0, 14, 0]}>
+        <group position={[0, 15, 0]}>
           <HoverLabel text="🥾 Meet The Explorer" />
         </group>
       )}

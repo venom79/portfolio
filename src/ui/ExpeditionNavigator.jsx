@@ -96,11 +96,21 @@ export default function ExpeditionNavigator() {
                 bottom-20
                 right-4
                 z-[500]
-                h-[150px]
-                w-[150px]
+                h-[135px]
+                w-[135px]
+
+                sm:h-[150px]
+                sm:w-[150px]
+
+                md:h-[190px]
+                md:w-[190px]
               "
             >
-              <Compass section={section} setSection={setSection} />
+              <Compass
+                section={section}
+                setSection={setSection}
+                onNavigate={() => setOpen(false)}
+              />
             </motion.div>
           )}
         </AnimatePresence>
@@ -132,7 +142,7 @@ export default function ExpeditionNavigator() {
   );
 }
 
-function Compass({ section, setSection }) {
+function Compass({ section, setSection, onNavigate }) {
   return (
     <div
       className="
@@ -141,7 +151,9 @@ function Compass({ section, setSection }) {
         w-full
         overflow-hidden
         rounded-full
-        border-[5px]
+        border-[3px]
+        sm:border-4
+        md:border-[5px]
         border-[#6b4423]
         shadow-2xl
       "
@@ -151,6 +163,7 @@ function Compass({ section, setSection }) {
         active={section === "summit" || section === "climb"}
         onClick={() => {
           setSection("climb");
+          onNavigate?.();
         }}
       />
 
@@ -159,6 +172,7 @@ function Compass({ section, setSection }) {
         active={section === "baseCamp"}
         onClick={() => {
           setSection("baseCamp");
+          onNavigate?.();
         }}
       />
 
@@ -167,16 +181,21 @@ function Compass({ section, setSection }) {
         active={section === "forest"}
         onClick={() => {
           setSection("forest");
+          onNavigate?.();
         }}
       />
 
       <div
         className="
           absolute
-          bottom-4
+          bottom-2
+          sm:bottom-3
+          md:bottom-4
+          text-[7px]
+          sm:text-[8px]
+          md:text-[9px]
           left-1/2
           -translate-x-1/2
-          text-[9px]
           font-bold
           uppercase
           tracking-wider
@@ -193,8 +212,12 @@ function Compass({ section, setSection }) {
           top-1/2
           z-20
           flex
-          h-14
-          w-14
+          h-11
+          w-11
+          sm:h-12
+          sm:w-12
+          md:h-14
+          md:w-14
           -translate-x-1/2
           -translate-y-1/2
           flex-col
@@ -208,9 +231,9 @@ function Compass({ section, setSection }) {
           shadow-xl
         "
       >
-        <div className="text-base">🧭</div>
+        <div className="text-xs sm:text-sm md:text-base">🧭</div>
 
-        <div className="text-[10px] font-bold text-[#4a2810]">
+        <div className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-[#4a2810]">
           {sectionNames[section]}
         </div>
       </div>
@@ -220,9 +243,11 @@ function Compass({ section, setSection }) {
 
 function Slice({ destination, active, onClick }) {
   const labelPosition = {
-    summit: "top-6 left-1/2 -translate-x-1/2",
-    baseCamp: "bottom-20 left-4",
-    forest: "bottom-20 right-3",
+    summit: "top-3 left-1/2 -translate-x-1/2 md:top-6",
+
+    baseCamp: "bottom-14 left-2 md:bottom-20 md:left-4",
+
+    forest: "bottom-14 right-2 md:bottom-20 md:right-3",
   };
 
   return (
@@ -268,7 +293,9 @@ function Slice({ destination, active, onClick }) {
           className="
             absolute
             inset-0
-            border-[6px]
+            border-[3px]
+            sm:border-4
+            md:border-[6px]
             border-yellow-300
           "
           style={{
@@ -282,11 +309,17 @@ function Slice({ destination, active, onClick }) {
           absolute
           z-30
           ${labelPosition[destination.id]}
-          rounded-md
           bg-black/70
-          px-2
-          py-1
-          text-[9px]
+          rounded
+          px-1
+          py-0.5
+          sm:px-1.5
+          sm:py-0.5
+          md:px-2
+          md:py-1
+          text-[7px]
+          sm:text-[8px]
+          md:text-[9px]
           font-semibold
           text-white
           backdrop-blur-sm

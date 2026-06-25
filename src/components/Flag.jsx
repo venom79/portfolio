@@ -36,7 +36,7 @@ const Flag = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1 }) => {
       )}
 
       {hovered && (
-        <group position={[0, 7, 0]}>
+        <group position={[0, 8, 0]}>
           <HoverLabel text="🏳 Trail Markers" />
         </group>
       )}

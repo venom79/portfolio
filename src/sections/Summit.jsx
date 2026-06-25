@@ -6,19 +6,26 @@ import MountainRange from "../components/MountainRange";
 import SunriseSky from "../components/SunriseSky";
 
 import { useCameraStore } from "../store/cameraStore";
+import { SUMMIT_LAYOUT } from "../config/sceneLayouts";
 
 const Summit = () => {
-  const section = useCameraStore((state) => state.section);
-
-  // const showSummitAtmosphere = section === "climb" || section === "summit";
   const atmosphere = useCameraStore((s) => s.summitAtmosphere);
 
+  const width = window.innerWidth;
+
+  const layout =
+    width < 768
+      ? SUMMIT_LAYOUT.mobile
+      : width < 1024
+        ? SUMMIT_LAYOUT.tablet
+        : SUMMIT_LAYOUT.desktop;
+
   return (
-    <group position={[-6, 54, -155]}>
+    <group position={layout.groupPosition}>
       {/* SUN */}
 
-      <mesh position={[140, 70, -200]}>
-        <sphereGeometry args={[12, 32, 32]} />
+      <mesh position={layout.sun.position}>
+        <sphereGeometry args={[layout.sun.radius, 32, 32]} />
 
         <meshStandardMaterial
           color="#ff6b35"
@@ -35,45 +42,35 @@ const Summit = () => {
       {/* MAIN SUN LIGHT */}
 
       <directionalLight
-        position={[140, 70, -200]}
-        intensity={2.5 * atmosphere}
+        position={layout.mainLight.position}
+        intensity={layout.mainLight.intensity * atmosphere}
         color="#ffb347"
       />
 
       {/* WARM FILL */}
 
       <directionalLight
-        position={[-60, 40, -120]}
-        intensity={0.5 * atmosphere}
+        position={layout.fillLight.position}
+        intensity={layout.fillLight.intensity * atmosphere}
         color="#ffe2b0"
       />
 
       {/* HIKER RIM LIGHT */}
 
       <pointLight
-        position={[8, 28, 15]}
-        intensity={1.8 * atmosphere}
-        distance={60}
+        position={layout.rimLight.position}
+        intensity={layout.rimLight.intensity * atmosphere}
+        distance={layout.rimLight.distance}
         color="#ffd59e"
       />
 
-      {/* SUN GLOW LIGHT */}
+      {/* SUN GLOW */}
 
       <pointLight
-        position={[140, 70, -200]}
-        intensity={4 * atmosphere}
-        distance={300}
+        position={layout.sunGlow.position}
+        intensity={layout.sunGlow.intensity * atmosphere}
+        distance={layout.sunGlow.distance}
         color="#ffb347"
-      />
-
-      {/* PARTICLES */}
-
-      <Sparkles
-        count={Math.floor(40 * atmosphere)}
-        scale={[120, 50, 120]}
-        size={4}
-        speed={0.1}
-        color="#ffd27d"
       />
 
       {/* MOUNTAINS */}
@@ -82,11 +79,19 @@ const Summit = () => {
 
       {/* FLAG */}
 
-      <Flag position={[6.2, 24, 16.1]} rotation={[0, 0, -0.2]} scale={3} />
+      <Flag
+        position={layout.flag.position}
+        rotation={layout.flag.rotation}
+        scale={layout.flag.scale}
+      />
 
       {/* HIKER */}
 
-      <Hiker position={[2, 23.7, 14.7]} rotation={[0, 2.4, -0.245]} scale={7} />
+      <Hiker
+        position={layout.hiker.position}
+        rotation={layout.hiker.rotation}
+        scale={layout.hiker.scale}
+      />
     </group>
   );
 };

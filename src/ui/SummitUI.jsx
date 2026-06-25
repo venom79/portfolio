@@ -8,23 +8,6 @@ export const SummitUI = () => {
 
   return (
     <motion.div
-      className="
-        absolute
-        left-8
-        top-8
-        z-50
-        max-w-sm
-        rounded-2xl
-        border
-        border-orange-300/20
-        bg-gradient-to-b
-        from-[#2b211a]/80
-        to-[#151515]/80
-        p-6
-        text-white
-        backdrop-blur-xl
-        shadow-[0_0_40px_rgba(255,170,80,0.15)]
-      "
       initial={{
         opacity: 0,
         y: 20,
@@ -36,28 +19,170 @@ export const SummitUI = () => {
       transition={{
         duration: 0.8,
       }}
+      className="
+        absolute
+        top-3
+        left-3
+        z-50
+
+        w-[82vw]
+        max-w-[300px]
+
+        rounded-3xl
+        border
+        border-white/10
+
+        bg-black/20
+
+        p-4
+
+        text-white
+
+        backdrop-blur-md
+
+        shadow-[0_10px_40px_rgba(0,0,0,0.25)]
+
+        sm:top-6
+        sm:left-6
+        sm:w-[85vw]
+        sm:max-w-[380px]
+        sm:p-6
+
+        lg:top-8
+        lg:left-8
+        lg:max-w-[420px]
+        lg:p-7
+
+        lg:border-orange-300/20
+        lg:bg-gradient-to-b
+        lg:from-[#2b211a]/85
+        lg:to-[#171717]/85
+        lg:backdrop-blur-xl
+        lg:shadow-[0_0_40px_rgba(255,170,80,0.15)]
+      "
     >
-      <p className="mb-2 text-xs uppercase tracking-[0.25em] text-orange-200">
-        The Summit
+      {/* Heading */}
+
+      <p
+        className="
+          mb-2
+          text-[10px]
+          uppercase
+          tracking-[0.35em]
+          text-orange-300
+
+          sm:text-xs
+        "
+      >
+        THE SUMMIT
       </p>
 
-      <h2 className="mb-3 text-4xl font-bold">Current Position</h2>
+      <h2
+        className="
+          mb-4
+          text-2xl
+          font-bold
+          leading-tight
 
-      <p className="mb-5 text-sm text-white/70">
+          sm:text-4xl
+
+          lg:text-5xl
+        "
+      >
+        Current Position
+      </h2>
+
+      {/* Description */}
+
+      <p
+        className="
+          hidden
+          mb-5
+          text-sm
+          leading-relaxed
+          text-white/80
+
+          sm:block
+        "
+      >
         Where the expedition stands today.
       </p>
 
-      <div className="space-y-2 text-white/90">
+      {/* Skills */}
+
+      <div
+        className="
+          space-y-2
+
+          text-base
+          text-white/90
+
+          sm:space-y-3
+          sm:text-lg
+
+          lg:text-xl
+        "
+      >
         <p>Backend Engineering</p>
+
         <p>System Design</p>
-        <p>AI & Machine Learning</p>
+
+        <p className="hidden sm:block">AI & Machine Learning</p>
       </div>
 
-      <div className="mt-5 border-t border-white/10 pt-4">
-        <p className="text-sm text-orange-200">Next Peak</p>
+      {/* Divider */}
 
-        <p className="font-medium">
-          Building larger systems & solving harder problems.
+      <div
+        className="
+          mt-4
+          border-t
+          border-white/10
+          pt-3
+
+          sm:mt-6
+          sm:pt-5
+        "
+      >
+        <p
+          className="
+            mb-1
+            text-xs
+            text-orange-300
+
+            sm:text-sm
+          "
+        >
+          Next Peak
+        </p>
+
+        {/* Mobile */}
+
+        <p
+          className="
+            text-base
+            font-semibold
+
+            sm:hidden
+          "
+        >
+          Building larger systems.
+        </p>
+
+        {/* Desktop */}
+
+        <p
+          className="
+            hidden
+            font-semibold
+            leading-relaxed
+
+            sm:block
+            sm:text-lg
+          "
+        >
+          Building larger systems &
+          <br />
+          solving harder problems.
         </p>
       </div>
     </motion.div>

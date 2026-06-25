@@ -3,13 +3,28 @@ import { useCameraStore } from "../store/cameraStore";
 
 export const ForestUI = () => {
   const section = useCameraStore((state) => state.section);
-  const setSection = useCameraStore((state) => state.setSection);
 
   if (section !== "forest") return null;
 
   return (
     <motion.div
-      className="absolute left-8 top-8 z-50 max-w-sm"
+      className="
+        absolute
+        top-4
+        left-4
+        z-50
+
+        w-[88vw]
+        max-w-[320px]
+
+        sm:top-6
+        sm:left-6
+        sm:max-w-[380px]
+
+        lg:top-8
+        lg:left-8
+        lg:max-w-[500px]
+      "
       initial={{
         opacity: 0,
         y: -20,
@@ -20,35 +35,102 @@ export const ForestUI = () => {
       }}
       transition={{
         duration: 0.8,
-        delay: 3, // adjust to match camera travel time
+        delay: 3,
         ease: "easeOut",
       }}
     >
       <div
         className="
-          rounded-2xl
+          rounded-3xl
           border
           border-white/10
+
           bg-black/20
-          p-5
+
+          p-4
+
           text-white
           backdrop-blur-md
+
+          sm:p-6
+
+          lg:p-7
         "
       >
-        <p className="mb-2 text-sm uppercase tracking-[0.3em] text-amber-300">
-          Skill Woods
+        {/* Heading */}
+
+        <p
+          className="
+            mb-2
+
+            text-[10px]
+            uppercase
+            tracking-[0.35em]
+            text-amber-300
+
+            sm:text-xs
+          "
+        >
+          SKILL WOODS
         </p>
 
-        <h2 className="mb-4 text-3xl font-bold">Choose Your Trail</h2>
+        <h2
+          className="
+            mb-4
 
-        <p className="mb-4 text-white/80 leading-relaxed">
+            text-2xl
+            font-bold
+            leading-tight
+
+            sm:text-4xl
+          "
+        >
+          Choose Your Trail
+        </h2>
+
+        {/* Desktop Description */}
+
+        <p
+          className="
+            hidden
+            mb-5
+            text-base
+            leading-relaxed
+            text-white/80
+
+            sm:block
+          "
+        >
           Three paths lie ahead. Which one will you follow?
         </p>
 
-        <div className="space-y-2 text-sm text-white/70">
-          <p>🪓 Skills Trail → Technologies & Tools</p>
-          <p>📜 Experience Trail → Journey & Growth</p>
-          <p>🏕 Projects Trail → Things I've Built</p>
+        {/* Trails */}
+
+        <div
+          className="
+            space-y-3
+
+            text-sm
+            text-white/80
+
+            sm:text-base
+          "
+        >
+          {/* Desktop */}
+
+          <div className="hidden space-y-3 sm:block">
+            <p>🪓 Skills Trail → Technologies & Tools</p>
+            <p>📜 Experience Trail → Journey & Growth</p>
+            <p>🏕 Projects Trail → Things I've Built</p>
+          </div>
+
+          {/* Mobile */}
+
+          <div className="space-y-2 sm:hidden">
+            <p>🪓 Skills Trail</p>
+            <p>📜 Experience Trail</p>
+            <p>🏕 Projects Trail</p>
+          </div>
         </div>
       </div>
     </motion.div>
