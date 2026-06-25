@@ -1,1 +1,24 @@
 @import "tailwindcss";
+/* Expedition-themed scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c8860a #12100a;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #12100a;
+  border-left: 1px solid #2e1f0a;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #5a3e1b;
+  border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #c8860a;
+}

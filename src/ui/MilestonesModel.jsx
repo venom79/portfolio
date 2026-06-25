@@ -1,305 +1,579 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useUIStore } from "../store/uiStore";
+import { FaChevronRight } from "react-icons/fa";
+
+// ─── Data ────────────────────────────────────────────────────────────────────
 
 const milestones = [
   {
     id: "hackathon",
-    icon: "🏆",
+    tag: "ACHIEVEMENT",
     title: "Top 10 Hackathon Finish",
     date: "2026",
-
     image: "/images/hackathon.jpg",
-
     shortDescription: "Placed 9th among 100 participating teams.",
-
     description:
       "One of my first experiences building under pressure, collaborating with a team, and presenting a solution within a strict deadline. It taught me teamwork, rapid problem solving and pitching ideas effectively.",
-
     highlights: [
       "9th Place",
-      "100 Teams Participated",
+      "100 Teams",
       "Team Collaboration",
       "Project Presentation",
     ],
   },
-
   {
     id: "freelance",
-    icon: "💼",
+    tag: "MILESTONE",
     title: "First Freelance Project",
     date: "2026",
-
     image: "/images/freelance.jpg",
-
     shortDescription: "Delivered software for a real client.",
-
     description:
       "My first experience working directly with a client. Learned communication, requirements gathering, planning and delivering a real-world project.",
-
     highlights: [
       "Client Communication",
       "Requirements Gathering",
       "Project Delivery",
     ],
   },
-
   {
     id: "real-estate",
-    icon: "🏠",
+    tag: "BUILD",
     title: "Real Estate Platform",
     date: "2026",
-
     image: "/images/real-estate.jpg",
-
     shortDescription: "Largest project built so far.",
-
     description:
-      "A full stack real estate platform featuring GraphQL APIs, PostgreSQL, Prisma ORM, authentication, reviews and property management.",
-
+      "A full-stack real estate platform featuring GraphQL APIs, PostgreSQL, Prisma ORM, authentication, reviews and property management.",
     highlights: ["React", "GraphQL", "Prisma", "PostgreSQL", "Authentication"],
   },
-
   {
     id: "portfolio",
-    icon: "🏕",
-    title: "3D Portfolio",
+    tag: "CREATIVE",
+    title: "3D Expedition Portfolio",
     date: "2026",
-
     image: "/images/portfolio.jpg",
-
     shortDescription: "Interactive expedition-themed portfolio.",
-
     description:
       "Built with Three.js, React Three Fiber, GSAP and Framer Motion to create an explorable world rather than a traditional website.",
-
     highlights: ["Three.js", "React Three Fiber", "GSAP", "Framer Motion"],
   },
 ];
 
-const MilestonesList = ({ onSelect }) => {
-  return (
-    <div className="grid gap-6">
-      {milestones.map((milestone) => (
-        <button
-          key={milestone.id}
-          onClick={() => onSelect(milestone)}
-          className="
-            overflow-hidden
-            rounded-xl
-            bg-white/30
-            text-left
-            transition
-            hover:bg-white/50
-            hover:scale-[1.01]
-          "
+// ─── Divider ─────────────────────────────────────────────────────────────────
+
+const SectionDivider = ({ label }) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      margin: "0 0 20px",
+    }}
+  >
+    <div style={{ flex: 1, height: "1px", background: "#3a2a14" }} />
+    <span
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "11px",
+        letterSpacing: "0.28em",
+        color: "#5a4020",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {label}
+    </span>
+    <div style={{ flex: 1, height: "1px", background: "#3a2a14" }} />
+  </div>
+);
+
+// ─── List view ───────────────────────────────────────────────────────────────
+
+const MilestonesList = ({ onSelect }) => (
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+      gap: "14px",
+    }}
+  >
+    {milestones.map((m, i) => (
+      <motion.button
+        key={m.id}
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: i * 0.07 }}
+        onClick={() => onSelect(m)}
+        style={{
+          background: "#12100a",
+          border: "1px solid #3a2a14",
+          textAlign: "left",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          transition: "border-color 0.2s",
+        }}
+        whileHover={{ borderColor: "#c8860a" }}
+      >
+        {/* Cover image */}
+        <div
+          style={{
+            height: "160px",
+            overflow: "hidden",
+            background: "#0e0c08",
+            position: "relative",
+          }}
         >
           <img
-            src={milestone.image}
-            alt={milestone.title}
-            className="
-              h-56
-              w-full
-              object-cover
-            "
+            src={m.image}
+            alt={m.title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "sepia(30%) contrast(1.05) brightness(0.85)",
+              display: "block",
+            }}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
           />
-
-          <div className="p-5">
-            <p className="text-sm text-[#7c5330]">{milestone.date}</p>
-
-            <h3 className="mt-1 text-2xl font-bold text-[#4a2810]">
-              {milestone.icon} {milestone.title}
-            </h3>
-
-            <p className="mt-2 text-[#3d2914]">{milestone.shortDescription}</p>
+          {/* Tag overlay */}
+          <div
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "10px",
+              letterSpacing: "0.28em",
+              color: "#1a1208",
+              background: "#c8860a",
+              padding: "2px 8px",
+            }}
+          >
+            {m.tag}
           </div>
-        </button>
+        </div>
+
+        {/* Card body */}
+        <div
+          style={{
+            padding: "14px 16px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "6px",
+            flex: 1,
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Special Elite', monospace",
+              fontSize: "10px",
+              color: "#5a4020",
+              letterSpacing: "0.1em",
+            }}
+          >
+            {m.date}
+          </div>
+          <h3
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "clamp(17px, 2.2vw, 20px)",
+              letterSpacing: "0.06em",
+              color: "#e8d5a3",
+              margin: 0,
+              lineHeight: 1.2,
+            }}
+          >
+            {m.title}
+          </h3>
+          <p
+            style={{
+              fontFamily: "'Special Elite', monospace",
+              fontSize: "clamp(11px, 1.4vw, 12px)",
+              color: "#7a5c35",
+              margin: 0,
+              lineHeight: 1.6,
+            }}
+          >
+            {m.shortDescription}
+          </p>
+          <div
+            style={{
+              marginTop: "auto",
+              paddingTop: "10px",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#c8860a",
+            }}
+          >
+            VIEW ENTRY <FaChevronRight size={9} />
+          </div>
+        </div>
+      </motion.button>
+    ))}
+  </div>
+);
+
+// ─── Detail view ─────────────────────────────────────────────────────────────
+
+const MilestoneDetail = ({ milestone: m, onBack }) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -16 }}
+    transition={{ duration: 0.25 }}
+  >
+    {/* Breadcrumb */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        marginBottom: "22px",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "12px",
+        letterSpacing: "0.2em",
+      }}
+    >
+      <button
+        onClick={onBack}
+        style={{
+          color: "#c8860a",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontFamily: "inherit",
+          fontSize: "inherit",
+          letterSpacing: "inherit",
+          padding: 0,
+          textDecoration: "underline",
+          textDecorationColor: "rgba(200,134,10,0.4)",
+        }}
+      >
+        TRAIL MARKERS
+      </button>
+      <FaChevronRight size={9} color="#5a4020" />
+      <span style={{ color: "#5a4020" }}>{m.title.toUpperCase()}</span>
+    </div>
+
+    {/* Cover */}
+    <div
+      style={{
+        height: "clamp(180px, 28vw, 280px)",
+        overflow: "hidden",
+        marginBottom: "28px",
+        border: "1px solid #3a2a14",
+        position: "relative",
+      }}
+    >
+      <img
+        src={m.image}
+        alt={m.title}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          filter: "sepia(25%) contrast(1.05) brightness(0.85)",
+          display: "block",
+        }}
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: "14px",
+          left: "14px",
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "11px",
+          letterSpacing: "0.28em",
+          color: "#1a1208",
+          background: "#c8860a",
+          padding: "3px 10px",
+        }}
+      >
+        {m.tag}
+      </div>
+    </div>
+
+    {/* Title block */}
+    <div
+      style={{
+        borderLeft: "3px solid #c8860a",
+        paddingLeft: "16px",
+        marginBottom: "28px",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "'Special Elite', monospace",
+          fontSize: "11px",
+          color: "#5a4020",
+          letterSpacing: "0.1em",
+          marginBottom: "4px",
+        }}
+      >
+        {m.date}
+      </div>
+      <h2
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "clamp(26px, 4.5vw, 42px)",
+          letterSpacing: "0.06em",
+          color: "#e8d5a3",
+          margin: 0,
+          lineHeight: 1,
+        }}
+      >
+        {m.title}
+      </h2>
+    </div>
+
+    <SectionDivider label="FIELD REPORT" />
+
+    <p
+      style={{
+        fontFamily: "'Special Elite', monospace",
+        fontSize: "clamp(12px, 1.6vw, 14px)",
+        color: "#7a5c35",
+        lineHeight: 1.8,
+        marginBottom: "28px",
+      }}
+    >
+      {m.description}
+    </p>
+
+    <SectionDivider label="HIGHLIGHTS" />
+
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+      {m.highlights.map((h) => (
+        <span
+          key={h}
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "12px",
+            letterSpacing: "0.15em",
+            color: "#e8d5a3",
+            background: "#12100a",
+            border: "1px solid #3a2a14",
+            padding: "5px 14px",
+          }}
+        >
+          {h}
+        </span>
       ))}
     </div>
-  );
-};
+  </motion.div>
+);
 
-const MilestoneDetails = ({ milestone, onBack }) => {
-  return (
-    <div>
-      {/* Breadcrumb */}
-
-      <div className="mb-6 flex items-center gap-3">
-        <button
-          onClick={onBack}
-          className="
-            rounded-lg
-            bg-[#6b4423]
-            px-4
-            py-2
-            text-white
-            transition
-            hover:bg-[#7a5130]
-          "
-        >
-          ← Back
-        </button>
-
-        <span className="text-[#7c5330]">
-          Trail Markers &gt; {milestone.title}
-        </span>
-      </div>
-
-      {/* Cover */}
-
-      <img
-        src={milestone.image}
-        alt={milestone.title}
-        className="
-          mb-8
-          h-80
-          w-full
-          rounded-xl
-          object-cover
-        "
-      />
-
-      {/* Title */}
-
-      <h2 className="mb-2 text-4xl font-bold text-[#4a2810]">
-        {milestone.icon} {milestone.title}
-      </h2>
-
-      <p className="mb-6 text-[#7c5330]">{milestone.date}</p>
-
-      {/* Description */}
-
-      <p className="mb-10 text-lg leading-relaxed text-[#3d2914]">
-        {milestone.description}
-      </p>
-
-      {/* Highlights */}
-
-      <h3 className="mb-4 text-2xl font-bold text-[#4a2810]">Highlights</h3>
-
-      <div className="flex flex-wrap gap-3">
-        {milestone.highlights.map((highlight) => (
-          <span
-            key={highlight}
-            className="
-              rounded-full
-              bg-[#8b5a2b]/10
-              px-4
-              py-2
-              text-[#4a2810]
-            "
-          >
-            {highlight}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
+// ─── Main modal ──────────────────────────────────────────────────────────────
 
 const MilestonesModal = () => {
   const activeBoard = useUIStore((state) => state.activeBoard);
   const closeBoard = useUIStore((state) => state.closeBoard);
-
   const [selectedMilestone, setSelectedMilestone] = useState(null);
+
+  const handleClose = () => {
+    setSelectedMilestone(null);
+    closeBoard();
+  };
 
   return (
     <AnimatePresence>
       {activeBoard === "milestones" && (
         <motion.div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60"
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 200,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "16px",
+            background: "rgba(10, 8, 4, 0.82)",
+            backdropFilter: "blur(3px)",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onClick={(e) => e.target === e.currentTarget && handleClose()}
         >
           <motion.div
-            initial={{
-              scale: 0.8,
-              rotate: -2,
-              opacity: 0,
+            initial={{ scale: 0.88, y: 30, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              width: "min(900px, 100%)",
+              maxHeight: "90vh",
+              display: "flex",
+              flexDirection: "column",
+              background: "#1c1710",
+              border: "2px solid #5a3e1b",
+              boxShadow:
+                "0 0 0 1px #2e1f0a, 0 24px 60px rgba(0,0,0,0.75), inset 0 1px 0 rgba(200,134,10,0.12)",
+              position: "relative",
+              overflow: "hidden",
             }}
-            animate={{
-              scale: 1,
-              rotate: 0,
-              opacity: 1,
-            }}
-            exit={{
-              scale: 0.8,
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.4,
-            }}
-            className="
-              relative
-              h-[80vh]
-              w-[90vw]
-              max-w-6xl
-              overflow-hidden
-              rounded-2xl
-              border-[10px]
-              border-[#6b4423]
-              bg-[#f5e6c8]
-              p-10
-              shadow-2xl
-            "
           >
-            {/* Paper Texture */}
-
+            {/* Grain */}
             <div
-              className="absolute inset-0 opacity-10"
               style={{
-                background:
-                  "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 4px)",
+                position: "absolute",
+                inset: 0,
+                backgroundImage: `
+                  repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 3px),
+                  repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.015) 4px, rgba(255,255,255,0.015) 5px)
+                `,
+                pointerEvents: "none",
+                zIndex: 0,
               }}
             />
 
-            {/* Close */}
-
-            <button
-              onClick={() => {
-                closeBoard();
-                setSelectedMilestone(null);
+            {/* Top bar */}
+            <div
+              style={{
+                background:
+                  "linear-gradient(90deg, #c8860a 0%, #a06808 60%, #7a4e05 100%)",
+                padding: "8px 20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexShrink: 0,
+                position: "relative",
+                zIndex: 1,
               }}
-              className="
-                absolute
-                right-6
-                top-6
-                z-20
-                rounded-lg
-                bg-[#6b4423]
-                px-4
-                py-2
-                text-white
-                transition
-                hover:bg-[#7a5130]
-              "
             >
-              Close
-            </button>
-
-            <div className="relative z-10 h-full overflow-y-auto pr-2">
-              <h1
-                className="mb-3 text-5xl text-[#4a2810]"
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(10px, 1.8vw, 13px)",
+                    letterSpacing: "0.22em",
+                    color: "#1a1208",
+                  }}
+                >
+                  ◈ TRAIL MARKERS — EXPEDITION RECORD
+                </span>
+                {selectedMilestone && (
+                  <>
+                    <FaChevronRight size={9} color="rgba(26,18,8,0.5)" />
+                    <span
+                      style={{
+                        fontFamily: "'Bebas Neue', sans-serif",
+                        fontSize: "clamp(10px, 1.6vw, 12px)",
+                        letterSpacing: "0.18em",
+                        color: "rgba(26,18,8,0.7)",
+                      }}
+                    >
+                      {selectedMilestone.title.toUpperCase()}
+                    </span>
+                  </>
+                )}
+              </div>
+              <button
+                onClick={handleClose}
                 style={{
-                  fontFamily: "Playfair Display",
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: "13px",
+                  letterSpacing: "0.15em",
+                  color: "#1a1208",
+                  background: "rgba(0,0,0,0.2)",
+                  border: "1px solid rgba(0,0,0,0.3)",
+                  padding: "3px 14px",
+                  cursor: "pointer",
                 }}
               >
-                Trail Markers
-              </h1>
+                ✕ CLOSE
+              </button>
+            </div>
 
-              <p className="mb-10 italic text-[#7c5330]">
-                Important moments from the expedition so far.
-              </p>
+            {/* Header */}
+            <div
+              style={{
+                padding: "24px clamp(18px, 4vw, 36px) 20px",
+                flexShrink: 0,
+                position: "relative",
+                zIndex: 1,
+                borderBottom: "1px solid #2e1f0a",
+              }}
+            >
+              <div
+                style={{ borderLeft: "3px solid #c8860a", paddingLeft: "16px" }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(10px, 1.6vw, 12px)",
+                    letterSpacing: "0.3em",
+                    color: "#c8860a",
+                    marginBottom: "4px",
+                  }}
+                >
+                  IMPORTANT MOMENTS FROM THE EXPEDITION
+                </div>
+                <h1
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(26px, 4.5vw, 44px)",
+                    letterSpacing: "0.06em",
+                    color: "#e8d5a3",
+                    lineHeight: 1,
+                    margin: 0,
+                  }}
+                >
+                  TRAIL MARKERS
+                </h1>
+              </div>
+            </div>
 
-              {selectedMilestone ? (
-                <MilestoneDetails
-                  milestone={selectedMilestone}
-                  onBack={() => setSelectedMilestone(null)}
-                />
-              ) : (
-                <MilestonesList onSelect={setSelectedMilestone} />
-              )}
+            {/* Scrollable content */}
+            <div
+              style={{
+                overflowY: "auto",
+                flex: 1,
+                padding: "28px clamp(18px, 4vw, 36px)",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {!selectedMilestone ? (
+                  <motion.div
+                    key="list"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <MilestonesList onSelect={setSelectedMilestone} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={selectedMilestone.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <MilestoneDetail
+                      milestone={selectedMilestone}
+                      onBack={() => setSelectedMilestone(null)}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </motion.div>
